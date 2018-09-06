@@ -1,15 +1,59 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-const Home = () => {
+const link = {
+  width: '100px',
+  padding: '12px',
+  margin: '0 6px 6px',
+  background: 'blue',
+  textDecoration: 'none',
+  color: 'white'
+}
+
+const navBar = ()=>{
+  <div>
+    <NavLink exact to='/' style={link} activeStyle={{background: 'darkblue'}}>
+      Home
+    </NavLink>
+    <NavLink exact to='/about' style={link} activeStyle={{background: 'darkblue'}} >
+      About
+    </NavLink>
+    <NavLink exact to='/login' style={link} activeStyle={{background: 'darkblue'}} >
+      Login
+    </NavLink>
+  </div>
+}
+
+const Home = () => <div><h1>Home!</h1></div>
+
+const About = () =><div><h1>This is my about component!</h1></div>
+
+const Login = () => {
   return (
     <div>
-      <h1>Home!</h1>
+      <form>
+        <div>
+          <input type="text" name="username" placeholder="Username" />
+          <label htmlFor="username">Username</label>
+        </div>
+        <div>
+          <input type="password" name="password" placeholder="Password" />
+          <label htmlFor="password">Password</label>
+        </div>
+        <input type="submit" value="Login" />
+      </form>
     </div>
   );
 };
 
-ReactDOM.render(
-  <Home />,
+ReactDOM.render((
+  <Router>
+    <React.Fragment>
+    <Route path="/" component= {Home} />
+    <Route path='/about' component= {About}/>
+    <Route path='/login' component= {Login} />
+    </React.Fragment>
+  </Router>),
   document.getElementById('root')
 );
